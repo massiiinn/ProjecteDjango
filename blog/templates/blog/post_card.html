@@ -1,0 +1,17 @@
+{% load static %}
+<div class="col">
+  <div class="card h-100" style="width: 18rem;">
+    <a href="{% url 'post_detail' post.slug %}">
+      <img
+        src="{% static 'blog/images/' %}{{ post.image_name }}"
+        class="card-img-top"
+        alt="{{ post.title }}"
+      >
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">{{ post.excerpt }}</p>
+      <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Llegir més</a>
+    </div>
+  </div>
+</div>

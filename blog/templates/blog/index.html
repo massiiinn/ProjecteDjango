@@ -1,0 +1,46 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero image a la part superior sense text ni fosc -->
+<section id="welcome" class="mb-5">
+  <div class="hero-image-clean">
+    <img src="{% static 'blog/images/iml.jpg' %}" alt="Imatge del blog" class="w-100" style="max-height: 550px; object-fit: cover; border-radius: 12px;">
+  </div>
+</section>
+
+<!-- Títol i subtítol -->
+<div class="text-center my-5">
+  <h1 class="display-4 fw-bold">BENVINGUT AL MEU BLOG DJANGO</h1>
+  <p class="lead">Bones! Aquest és el meu projecte del Blog Django</p>
+</div>
+
+<!-- Contenidor per als títols i posts amb amplada fixa i centrada -->
+<div class="container" style="max-width: 1100px;">
+  
+  <!-- Últims posts -->
+  <h2 class="mt-5 mb-3">DARRERS POSTS</h2>
+
+  <div class="d-flex justify-content-between my-4">
+    <div class="row g-2" style="width: 100%;">
+      {% for post in posts %}
+        <div class="col-5 col-md-4">
+          {% include "blog/post_card.html" with post=post %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Informació sobre Django -->
+  <h2 class="mt-5 mb-3">Django</h2>
+  <p>
+    Django és un framework popular de desenvolupament web de codi obert que s'utilitza per crear aplicacions web robustes i escalables en Python. Va ser creat l'any 2003 per Adrian Holovaty i Simon Willison mentre treballaven en el lloc web de notícies Lawrence Journal-World.
+  </p>
+  <p>
+    Django segueix el patró de disseny Model-Vista-Controlador (MVC), que separa la lògica de presentació de les dades i la interacció amb l'usuari. El framework també proporciona eines pel treball amb bases de dades, l'autenticació d'usuaris i la gestió de formularis, entre altres característiques.
+  </p>
+
+</div>
+
+{% endblock %}

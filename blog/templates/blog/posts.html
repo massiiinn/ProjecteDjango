@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Tots els Posts</h2>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for post in posts %}
+      {% include "blog/post_card.html" with post=post %}
+    {% empty %}
+      <p>No hi ha posts disponibles.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

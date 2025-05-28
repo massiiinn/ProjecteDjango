@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <h1 class="text-center mb-4 display-5">Etiquetes</h1>
+  <div class="d-flex justify-content-center flex-wrap gap-3">
+    {% for tag in tags %}
+      <a href="{% url 'tag-posts' tag.id %}" class="btn btn-secondary px-4 py-2 rounded-pill">
+        {{ tag.tag }}
+      </a>
+    {% endfor %}
+  </div>
+{% endblock %}

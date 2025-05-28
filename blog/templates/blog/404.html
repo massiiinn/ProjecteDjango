@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center my-5">
+  <h1 class="display-1">404</h1>
+  <h2>Pàgina no trobada</h2>
+  <p class="lead">
+    Ho sentim, però la pàgina que estàs buscant no existeix.
+  </p>
+  <a href="{% url 'starting_page' %}" class="btn btn-primary mt-3">
+    Torna a l’inici
+  </a>
+</div>
+{% endblock %}

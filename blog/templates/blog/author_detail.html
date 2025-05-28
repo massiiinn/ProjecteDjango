@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1 class="mb-4">Detalls de l'Autor</h1>
+  <p><strong>Nom:</strong> {{ author.first_name }}</p>
+  <p><strong>Cognom:</strong> {{ author.last_name }}</p>
+  <p><strong>Adreça:</strong> {{ author.email }}</p>
+
+  <h2 class="mt-5 mb-4">Posts publicats per {{ author.first_name }} {{ author.last_name }}</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for post in posts %}
+      <div class="col">
+        <div class="card h-100">
+          <img src="{% static 'blog/images/' %}{{ post.image_name }}" class="card-img-top" alt="{{ post.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.excerpt }}</p>
+            <a href="{% url 'post_detail' post.slug %}" class="btn btn-outline-primary btn-sm">Llegir més</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>Aquest autor encara no ha publicat cap post.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

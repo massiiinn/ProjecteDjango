@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1 class="mb-5">Posts amb l'etiqueta: "{{ tag.tag }}"</h1>
+
+  {% if posts %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for post in posts %}
+        {% include "blog/post_card.html" with post=post %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No hi ha cap post associat amb aquesta etiqueta.</p>
+  {% endif %}
+{% endblock %}
