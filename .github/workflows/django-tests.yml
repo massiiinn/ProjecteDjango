@@ -25,10 +25,11 @@ jobs:
     - name: Generate Pydoc HTML for models and views
       run: |
         mkdir -p docs
-        python -m pydoc -w blog/models.py
-        python -m pydoc -w blog/views.py
+        PYTHONPATH=. python -m pydoc -w blog.models
+        PYTHONPATH=. python -m pydoc -w blog.views
         mv blog.models.html docs/models.html
         mv blog.views.html docs/views.html
+  
 
     - name: Commit generated docs
       run: |
