@@ -23,13 +23,15 @@ jobs:
         pip install -r requirements.txt
 
     - name: Generate Pydoc HTML for models and views
+      env:
+        DJANGO_SETTINGS_MODULE: my_site.settings
+        PYTHONPATH: ${{ github.workspace }}
       run: |
         mkdir -p docs
-        PYTHONPATH=. python -m pydoc -w blog.models
-        PYTHONPATH=. python -m pydoc -w blog.views
+        python -m pydoc -w blog.models
+        python -m pydoc -w blog.views
         mv blog.models.html docs/models.html
         mv blog.views.html docs/views.html
-  
 
     - name: Commit generated docs
       run: |
@@ -38,4 +40,3 @@ jobs:
         git add docs/
         git commit -m "Actualizar documentación Pydoc" || echo "No hay cambios que commitear"
         git push
-
