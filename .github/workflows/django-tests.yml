@@ -1,18 +1,20 @@
-name: Generate Pydoc Documentation
+name: Django Tests and PyDoc
 
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  build-docs:
+  test_and_docs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Python
+    - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
@@ -22,15 +24,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Run migrations
+      run: |
+        python manage.py migrate
+
+    - name: Run tests
+      run: |
+        python manage.py test
+
     - name: Generate Pydoc HTML for models and views
       run: |
         mkdir -p docs
-        python generate_docs.py
-
-    - name: Commit generated docs
-      run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
-        git add docs/
-        git commit -m "Actualizar documentación Pydoc" || echo "No hay cambios que commitear"
-        git push
+        PYTHONPATH=. python -m pydoc -w blog.models
+        PYTHONPATH=. python -m pydoc -w blog.views
+        mv blog.models.html docs/models.html
+        mv blog.views.html docs/views.html
