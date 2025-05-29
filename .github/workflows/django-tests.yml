@@ -36,12 +36,9 @@ jobs:
       run: |
         python manage.py test
 
-    - name: Generate Pydoc HTML for models and views
+    - name: Generate Pydoc HTML with script
       env:
         DJANGO_SETTINGS_MODULE: my_site.settings
       run: |
         mkdir -p docs
-        PYTHONPATH=. python -m pydoc -w blog.models
-        PYTHONPATH=. python -m pydoc -w blog.views
-        mv blog.models.html docs/models.html
-        mv blog.views.html docs/views.html
+        python generate_docs.py
