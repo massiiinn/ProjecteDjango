@@ -31,3 +31,18 @@ jobs:
     - name: Run tests
       run: |
         python manage.py test
+
+    - name: Generate Pydoc HTML
+      run: |
+        mkdir -p docs
+        python -m pydoc -w blog.models
+        python -m pydoc -w blog.views
+        mv blog.models.html docs/models.html
+        mv blog.views.html docs/views.html
+  
+
+    - name: Upload documentation
+      uses: actions/upload-artifact@v4
+      with:
+        name: pydoc-html
+        path: docs/index.html
