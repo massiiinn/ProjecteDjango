@@ -5,7 +5,7 @@ import importlib
 
 def generate_doc(module_name, output_path):
     mod = importlib.import_module(module_name)
-    pydoc.writedoc(mod)  # Esto genera un archivo .html en el directorio actual
+    pydoc.writedoc(mod) 
     filename = module_name + ".html"
     if os.path.exists(filename):
         os.rename(filename, output_path)

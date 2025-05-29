@@ -51,5 +51,5 @@ http://127.0.0.1:8000
 
 ## Documentació amb Pydoc
 
-Documentació models.py: https://massiiinn.github.io/ProjecteDjango/docs/models.html
-Documentació views.py: https://massiiinn.github.io/ProjecteDjango/docs/views.html
+https://massiiinn.github.io/ProjecteDjango/
+
