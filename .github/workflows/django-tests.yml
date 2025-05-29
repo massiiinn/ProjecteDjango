@@ -1,4 +1,4 @@
-name: Django Tests and PyDoc
+name: Django Tests and Generate Pydoc Docs
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test_and_docs:
+  test-and-docs:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,14 +25,20 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run migrations
+      env:
+        DJANGO_SETTINGS_MODULE: my_site.settings
       run: |
         python manage.py migrate
 
     - name: Run tests
+      env:
+        DJANGO_SETTINGS_MODULE: my_site.settings
       run: |
         python manage.py test
 
     - name: Generate Pydoc HTML for models and views
+      env:
+        DJANGO_SETTINGS_MODULE: my_site.settings
       run: |
         mkdir -p docs
         PYTHONPATH=. python -m pydoc -w blog.models
