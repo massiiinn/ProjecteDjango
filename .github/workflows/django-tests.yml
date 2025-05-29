@@ -23,15 +23,9 @@ jobs:
         pip install -r requirements.txt
 
     - name: Generate Pydoc HTML for models and views
-      env:
-        DJANGO_SETTINGS_MODULE: my_site.settings
-        PYTHONPATH: ${{ github.workspace }}
       run: |
         mkdir -p docs
-        python -m pydoc -w blog.models
-        python -m pydoc -w blog.views
-        mv blog.models.html docs/models.html
-        mv blog.views.html docs/views.html
+        python generate_docs.py
 
     - name: Commit generated docs
       run: |
